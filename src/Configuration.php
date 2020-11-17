@@ -17,7 +17,7 @@ class Configuration
     {
         return [
             'commands' => [
-                CitiesForecastCommand::NAME => CitiesForecastCommand::class,
+                ForecastCommand::NAME => ForecastCommand::class,
             ],
             'dependencies' => [
                 'aliases' => [
@@ -25,7 +25,7 @@ class Configuration
                     ForecastProvider::class => WeatherApiForecast::class,
                 ],
                 'factories' => [
-                    CitiesForecastCommand::class => CitiesForecastCommandFactory::class,
+                    ForecastCommand::class => ForecastCommandFactory::class,
                     MusementCities::class => MusementCitiesFactory::class,
                     WeatherApiForecast::class => WeatherApiForecastFactory::class
                 ],

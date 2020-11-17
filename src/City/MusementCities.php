@@ -25,7 +25,7 @@ final class MusementCities implements CityProvider
         try {
             $response = $this->client->get('cities');
         } catch (Throwable $exception) {
-            // TODO catch and trow app exception.
+            // TODO catch and throw app exception.
             var_dump($exception->getMessage());
             die();
         }
@@ -34,7 +34,10 @@ final class MusementCities implements CityProvider
 
         return array_map(
             function (array $city) {
-                return new City($city['name']);
+                return new City(
+                    $city['name'],
+                    new Coordinates($city['latitude'], $city['longitude'])
+                );
             },
             $responseData
         );

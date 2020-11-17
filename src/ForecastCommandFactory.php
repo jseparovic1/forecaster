@@ -8,11 +8,11 @@ use App\City\CityProvider;
 use App\Forecast\ForecastProvider;
 use Psr\Container\ContainerInterface;
 
-class CitiesForecastCommandFactory
+class ForecastCommandFactory
 {
-    public function __invoke(ContainerInterface $container): CitiesForecastCommand
+    public function __invoke(ContainerInterface $container): ForecastCommand
     {
-        return new CitiesForecastCommand(
+        return new ForecastCommand(
             $container->get(CityProvider::class),
             $container->get(ForecastProvider::class)
         );
