@@ -8,8 +8,8 @@ use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 require 'vendor/autoload.php';
 
 $container = require 'config/container.php';
-$console = $container->get('config')['console'];
+$commands = $container->get('config')['commands'];
 
-$application = new Application($console['name']);
-$application->setCommandLoader(new ContainerCommandLoader($container, $console['commands']));
+$application = new Application();
+$application->setCommandLoader(new ContainerCommandLoader($container, $commands));
 $application->run();
