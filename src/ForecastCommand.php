@@ -26,13 +26,9 @@ class ForecastCommand extends Command
         $this->forecasts = $forecasts;
     }
 
-    /**
-     * Configures the current command.
-     */
     protected function configure()
     {
-        $this
-            ->setDescription('Gets forecasts for of cities returned by musment api.');
+        $this->setDescription('Gets forecasts for of cities returned by musment api.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -40,9 +36,11 @@ class ForecastCommand extends Command
         $cities = $this->cities->getAll();
 
         foreach ($cities as $city) {
-            $forecast = $this->forecasts->getForecasts($city, new Days(2));
+            $forecasts = $this->forecasts->getForecasts($city, new Days(2));
 
-            $output->writeln($city->name() .' '. $forecast);
+            $output->writeln(
+                sprintf('Processed city %s | %s', $city, implode(', ', $forecasts))
+            );
         }
 
         return Command::SUCCESS;

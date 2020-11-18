@@ -24,4 +24,9 @@ class City
     {
         return $this->coordinates;
     }
+
+    public function __toString(): string
+    {
+        return $this->name();
+    }
 }
