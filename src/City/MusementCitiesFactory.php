@@ -10,12 +10,14 @@ use Psr\Container\ContainerInterface;
 
 final class MusementCitiesFactory
 {
-    public function __invoke(ContainerInterface $container): MusementCities
+    public function __invoke(ContainerInterface $container): CityProvider
     {
         $config = $container->get('config')['musement-api'];
 
         $client = new Client($config);
 
-        return new MusementCities($client, new JsonDecoder());
+        return new CachedCityProvider(
+            new MusementCities($client, new JsonDecoder())
+        );
     }
 }

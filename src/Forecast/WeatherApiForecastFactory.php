@@ -13,7 +13,7 @@ use Psr\Http\Message\RequestInterface;
 
 class WeatherApiForecastFactory
 {
-    public function __invoke(ContainerInterface $container): WeatherApiForecast
+    public function __invoke(ContainerInterface $container): ForecastProvider
     {
         $config = $container->get('config')['weather_api'];
 

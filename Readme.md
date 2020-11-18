@@ -13,7 +13,7 @@ Build container
 Run it
 
 ```bash
-    docker run --rm jseparovic/forecaster composer cities:forecasts
+    docker run --rm -it jseparovic/forecaster composer cities:forecasts
 ```
 
 ## Quality assurance 
