@@ -18,6 +18,11 @@ Run it
     docker run --rm -it -e WEATHER_API_KEY='API_KEY' jseparovic/forecaster composer cities:forecasts
 ```
 
+## Add vendor dependencies to host in development
+```bash
+    docker run --rm --interactive --tty --volume $PWD:/app composer install
+```
+
 ## Quality assurance 
 Use following command to check run tests and check static analysis errors.
 
