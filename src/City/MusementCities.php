@@ -29,7 +29,6 @@ final class MusementCities implements CityProvider
 
         $responseData = $this->decoder->decode((string)$response->getBody());
 
-
         $cities = [];
 
         foreach ($responseData as $city) {
