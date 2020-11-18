@@ -6,6 +6,7 @@ namespace App;
 
 use App\City\CityProvider;
 use App\Forecast\Days;
+use App\Forecast\ForecastFetchingFailed;
 use App\Forecast\ForecastProvider;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,7 +37,13 @@ class ForecastCommand extends Command
         $cities = $this->cities->getAll();
 
         foreach ($cities as $city) {
-            $forecasts = $this->forecasts->getForecasts($city, new Days(2));
+            try {
+                $forecasts = $this->forecasts->getForecasts($city, new Days(2));
+            } catch (ForecastFetchingFailed $exception) {
+                $output->writeln(sprintf('Skipping city %s', $exception->getCity()));
+
+                continue;
+            }
 
             $output->writeln(
                 sprintf('Processed city %s | %s', $city, implode(', ', $forecasts))

@@ -7,7 +7,6 @@ namespace App\City;
 use App\Decoder;
 use GuzzleHttp\Client;
 use Throwable;
-use function array_map;
 
 final class MusementCities implements CityProvider
 {
@@ -25,21 +24,25 @@ final class MusementCities implements CityProvider
         try {
             $response = $this->client->get('cities');
         } catch (Throwable $exception) {
-            // TODO catch and throw app exception.
-            var_dump($exception->getMessage());
-            die();
+            throw FailedToGetCities::because($exception->getMessage());
         }
 
         $responseData = $this->decoder->decode((string)$response->getBody());
 
-        return array_map(
-            function (array $city) {
-                return new City(
-                    $city['name'],
-                    new Coordinates($city['latitude'], $city['longitude'])
-                );
-            },
-            $responseData
-        );
+
+        $cities = [];
+
+        foreach ($responseData as $city) {
+            if (!isset($city['name']) || !isset($city['latitude']) || !isset($city['longitude'])) {
+                continue;
+            }
+
+            $cities[] = new City(
+                $city['name'],
+                new Coordinates($city['latitude'], $city['longitude'])
+            );
+        }
+
+        return $cities;
     }
 }

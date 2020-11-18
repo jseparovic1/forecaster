@@ -36,11 +36,8 @@ class WeatherApiForecast implements ForecastProvider
                 ]
             );
         } catch (Throwable $exception) {
-            // TODO catch and throw app exception.
-            var_dump($exception->getMessage());
-            die();
+            throw ForecastFetchingFailed::for($city);
         }
-
 
         $responseData = $this->decoder->decode((string)$response->getBody());
 
