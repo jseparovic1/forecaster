@@ -14,8 +14,6 @@ final class MusementCitiesFactory
     {
         $config = $container->get('config')['musement-api'];
 
-        // TODO validate config
-
         $client = new Client($config);
 
         return new MusementCities($client, new JsonDecoder());

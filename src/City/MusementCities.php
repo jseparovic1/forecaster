@@ -19,6 +19,9 @@ final class MusementCities implements CityProvider
         $this->decoder = $decoder;
     }
 
+    /**
+     * @return array<City>
+     */
     public function getAll(): array
     {
         try {

@@ -13,6 +13,9 @@ use App\Forecast\WeatherApiForecastFactory;
 
 class Configuration
 {
+    /**
+     * @return array<string, array>
+     */
     public function __invoke(): array
     {
         return [

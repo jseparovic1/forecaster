@@ -7,7 +7,7 @@ namespace App\City;
 interface CityProvider
 {
     /**
-     * @return City[]
+     * @return array<City>
      */
     public function getAll(): array;
 }

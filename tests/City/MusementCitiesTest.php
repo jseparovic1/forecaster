@@ -16,7 +16,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class MusementCitiesTest extends TestCase
+final class MusementCitiesTest extends TestCase
 {
     use ProphecyTrait;
 

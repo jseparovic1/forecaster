@@ -28,7 +28,7 @@ class ForecastCommand extends Command
         $this->forecasts = $forecasts;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setDescription('Gets forecasts for of cities returned by musment api.');
     }

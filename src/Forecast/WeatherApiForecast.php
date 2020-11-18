@@ -21,7 +21,7 @@ class WeatherApiForecast implements ForecastProvider
     }
 
     /**
-     * @return Forecast[]
+     * @return array<Forecast>
      */
     public function getForecasts(City $city, Days $days): array
     {
