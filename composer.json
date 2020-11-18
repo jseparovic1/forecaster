@@ -18,7 +18,9 @@
         "phpstan/phpstan": "^0.12.56"
     },
     "autoload": {
-        "App\\": "src/"
+        "psr-4": {
+            "App\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {

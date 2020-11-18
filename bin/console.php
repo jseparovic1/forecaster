@@ -5,7 +5,8 @@ declare(strict_types=1);
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 
-require 'vendor/autoload.php';
+chdir(__DIR__ . '/../');
+require_once 'vendor/autoload.php';
 
 $container = require 'config/container.php';
 $commands = $container->get('config')['commands'];

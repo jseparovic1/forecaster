@@ -13,7 +13,7 @@ $aggregator = new ConfigAggregator(
         //   - `*.global.php`
         //   - `local.php`
         //   - `*.local.php`
-        new \App\Configuration(),
+        new App\Configuration(),
         new PhpFileProvider(realpath(__DIR__) . '/autoload/{{,*.}global,{,*.}local}.php'),
     ]
 );
