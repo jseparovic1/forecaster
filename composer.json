@@ -29,8 +29,7 @@
         }
     },
     "scripts": {
-        "cs-check": "phpcs -s",
-        "cs-fix": "phpcbf",
+        "cities:forecasts": "php bin/console.php cities:forecast",
         "stan-check": "phpstan analyse",
         "test": "phpunit --colors=always --testdox",
         "check": [
