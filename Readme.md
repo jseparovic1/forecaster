@@ -22,3 +22,14 @@ Use following command to check run tests and check static analysis errors.
 ```bash
     docker run --rm jseparovic/forecaster composer check
 ```
+
+Run test only
+```bash
+    docker run --rm jseparovic/forecaster composer test
+```
+
+Run phpstan check only
+```bash
+    docker run --rm jseparovic/forecaster composer stan-check
+```
+
