@@ -24,7 +24,7 @@ final class MusementCities implements CityProvider
         try {
             $response = $this->client->get('cities');
         } catch (Throwable $exception) {
-            throw FailedToGetCities::because($exception->getMessage());
+            throw FailedToGetCities::because('Getting data from API resulted in exception.');
         }
 
         $responseData = $this->decoder->decode((string)$response->getBody());

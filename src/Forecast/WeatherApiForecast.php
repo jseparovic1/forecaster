@@ -36,16 +36,29 @@ class WeatherApiForecast implements ForecastProvider
                 ]
             );
         } catch (Throwable $exception) {
-            throw ForecastFetchingFailed::for($city);
+            throw FailedToGetForecast::for($city, 'Accessing Weather API resulted in error.');
         }
 
         $responseData = $this->decoder->decode((string)$response->getBody());
 
-        return array_map(
-            function (array $forecast) {
-                return new Forecast($forecast['day']['condition']['text']);
-            },
-            $responseData['forecast']['forecastday']
-        );
+        if (!isset($responseData['forecast']['forecastday'])) {
+            throw FailedToGetForecast::fromApiData($city, 'Data for daily forecasts is unknown.');
+        }
+
+        $dailyForecasts = $responseData['forecast']['forecastday'];
+        $forecasts = [];
+
+        foreach ($dailyForecasts as $i => $dailyForecast) {
+            if (!isset($dailyForecast['day']['condition']['text'])) {
+                throw FailedToGetForecast::for(
+                    $city,
+                    sprintf('Missing forecastday.%d.day.condition.text', $i)
+                );
+            }
+
+            $forecasts[] = new Forecast($dailyForecast['day']['condition']['text']);
+        }
+
+        return $forecasts;
     }
 }
