@@ -4,6 +4,8 @@ Forecaster gets daily forecast via Weather API for each city returned by Musemen
 
 ## Usage
 
+Get api key from https://www.weatherapi.com.
+
 Build container
 
 ```bash
@@ -13,7 +15,7 @@ Build container
 Run it
 
 ```bash
-    docker run --rm -it jseparovic/forecaster composer cities:forecasts
+    docker run --rm -it -e WEATHER_API_KEY='API_KEY' jseparovic/forecaster composer cities:forecasts
 ```
 
 ## Quality assurance 
