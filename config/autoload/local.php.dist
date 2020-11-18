@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     'weather_api' => [
         'base_uri' => 'http://api.weatherapi.com/v1/',
-        'key' => 'WEATHER_API_KEY',
+        'key' => getenv('WEATHER_API_KEY'),
     ],
     'musement-api' => [
         'base_uri' => 'https://api.musement.com/api/v3/',
