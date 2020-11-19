@@ -1,0 +1,217 @@
+openapi: 3.0.0
+info:
+  title: Forecast
+  version: '1.0'
+  description: Set and read forecast for specific city.
+  contact:
+    name: Jurica Separoic
+    url: separovic.dev
+    email: jurica.separovic@gmail.com
+servers:
+  - url: 'http://forecaster.com'
+    description: Forecaster
+paths:
+  '/api/v3/cities/{id}/forecasts':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        description: City id
+        required: true
+    get:
+      summary: Get city forecast
+      tags: []
+      responses:
+        '200':
+          description: |-
+            [
+            {
+                "id": "299bee2f-bbf9-41f2-8b32-010482c6c8f5",
+                "day": "2020-11-19",
+                "condition": "Partialy cluoud",
+                "temperature": {
+                    "celsius": 24,
+                    "fahrenheit": 75.2
+                }
+            }
+            ]
+      operationId: get-api-v3-cities-id-forecast
+      description: Get forecast for specificy city
+      parameters:
+        - schema:
+            type: string
+            format: date
+            example: '2020-11-19'
+          in: query
+          name: date
+          description: Get city forecast for specific date
+          required: true
+    post:
+      summary: Add city forecast
+      operationId: post-api-v3-cities-id-forecast
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Forecast
+              type: object
+              properties:
+                date:
+                  type: string
+                  minLength: 1
+                  description: ''
+                  format: date
+                  example: '2020-11-19'
+                condition:
+                  type: string
+                  minLength: 1
+                  example: Partialy cloud
+                  description: Human redable weather condition
+                temperature:
+                  type: object
+                  required:
+                    - celsius
+                    - fahrenheit
+                  description: ''
+                  properties:
+                    celsius:
+                      type: number
+                      description: Temperature in celsius
+                    fahrenheit:
+                      type: number
+                      description: Temperature in fahrenheit
+              required:
+                - date
+                - condition
+                - temperature
+            examples:
+              Temperature for 19th of November:
+                value:
+                  day: '2020-11-19'
+                  temperature:
+                    celsius: 24
+                    fahrenheit: 75.2
+        description: ''
+      description: Add forecast for specific city.
+      responses:
+        '201':
+          description: Forecast created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                Creation success:
+                  value: {}
+        '422':
+          description: Unprocessable Entity (WebDAV)
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 1
+                    example: Unprocessable Entity
+                  type:
+                    type: string
+                    minLength: 1
+                    description: ''
+                    example: 'https://httpstatus.es/422'
+                  status:
+                    type: number
+                  detail:
+                    type: string
+                    minLength: 1
+                  validation_failures:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        message:
+                          type: string
+                          minLength: 1
+                        value:
+                          type: string
+                      required:
+                        - message
+                        - value
+                required:
+                  - title
+                  - type
+                  - status
+                  - detail
+                  - validation_failures
+              examples: {}
+components:
+  schemas:
+    Forecast:
+      title: Forecast
+      type: object
+      properties:
+        id:
+          type: string
+    Validation:
+      description: ''
+      type: object
+      x-examples:
+        Invalid input field:
+          title: Unprocessable Entity
+          type: 'https://httpstatus.es/422'
+          status: 422
+          detail: Input validation failed.
+          validation_failures:
+            - id: email
+              message: This field is not a valid email address.
+              value: h4ck3r@@mail
+      properties:
+        title:
+          type: string
+          minLength: 1
+          description: Exception title
+          enum:
+            - Unprocessable Entity
+        type:
+          type: string
+          minLength: 1
+          enum:
+            - 'https://httpstatus.es/422'
+        status:
+          type: number
+          enum:
+            - 422
+        detail:
+          type: string
+          minLength: 1
+          enum:
+            - Input validation failed.
+        validation_failures:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                minLength: 1
+              value:
+                type: string
+              id:
+                type: string
+            required:
+              - message
+              - value
+      required:
+        - title
+        - type
+        - status
+        - detail
+        - validation_failures
+  securitySchemes: {}
