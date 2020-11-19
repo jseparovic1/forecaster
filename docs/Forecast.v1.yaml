@@ -22,20 +22,6 @@ paths:
     get:
       summary: Get city forecast
       tags: []
-      responses:
-        '200':
-          description: |-
-            [
-            {
-                "id": "299bee2f-bbf9-41f2-8b32-010482c6c8f5",
-                "day": "2020-11-19",
-                "condition": "Partialy cluoud",
-                "temperature": {
-                    "celsius": 24,
-                    "fahrenheit": 75.2
-                }
-            }
-            ]
       operationId: get-api-v3-cities-id-forecast
       description: Get forecast for specificy city
       parameters:
@@ -47,6 +33,31 @@ paths:
           name: date
           description: Get city forecast for specific date
           required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: ''
+                minItems: 1
+                uniqueItems: true
+                items:
+                  $ref: '#/components/schemas/Forecast'
+              examples:
+                Two day forecast for city:
+                  value:
+                    - id: 299bee2f-bbf9-41f2-8b32-010482c6c8f5
+                      day: '2020-11-19'
+                      temperature:
+                        celsius: 24
+                        fahrenheit: 75.2
+                    - id: 123123-bbf9-41f2-8b32-010482c6c8f5
+                      day: '2020-12-19'
+                      temperature:
+                        celsius: 25
+                        fahrenheit: 76.2
     post:
       summary: Add city forecast
       operationId: post-api-v3-cities-id-forecast
@@ -54,41 +65,11 @@ paths:
         content:
           application/json:
             schema:
-              description: Forecast
-              type: object
-              properties:
-                date:
-                  type: string
-                  minLength: 1
-                  description: ''
-                  format: date
-                  example: '2020-11-19'
-                condition:
-                  type: string
-                  minLength: 1
-                  example: Partialy cloud
-                  description: Human redable weather condition
-                temperature:
-                  type: object
-                  required:
-                    - celsius
-                    - fahrenheit
-                  description: ''
-                  properties:
-                    celsius:
-                      type: number
-                      description: Temperature in celsius
-                    fahrenheit:
-                      type: number
-                      description: Temperature in fahrenheit
-              required:
-                - date
-                - condition
-                - temperature
+              $ref: '#/components/schemas/CreateForecastRequest'
             examples:
               Temperature for 19th of November:
                 value:
-                  day: '2020-11-19'
+                  date: '2020-11-19'
                   temperature:
                     celsius: 24
                     fahrenheit: 75.2
@@ -110,54 +91,38 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
-                type: object
-                properties:
-                  title:
-                    type: string
-                    minLength: 1
-                    example: Unprocessable Entity
-                  type:
-                    type: string
-                    minLength: 1
-                    description: ''
-                    example: 'https://httpstatus.es/422'
-                  status:
-                    type: number
-                  detail:
-                    type: string
-                    minLength: 1
-                  validation_failures:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      type: object
-                      properties:
-                        message:
-                          type: string
-                          minLength: 1
-                        value:
-                          type: string
-                      required:
-                        - message
-                        - value
-                required:
-                  - title
-                  - type
-                  - status
-                  - detail
-                  - validation_failures
+                $ref: '#/components/schemas/ValidationFailedResponse'
               examples: {}
 components:
   schemas:
-    Forecast:
-      title: Forecast
+    CreateForecastRequest:
+      description: Add forecast reuquest
       type: object
       properties:
-        id:
+        date:
           type: string
-    Validation:
+          minLength: 1
+        temperature:
+          type: object
+          properties:
+            celsius:
+              type: number
+            fahrenheit:
+              type: number
+          required:
+            - celsius
+            - fahrenheit
+      required:
+        - date
+        - temperature
+      x-examples:
+        Create forecast for 11th of November:
+          date: '2020-11-19'
+          temperature:
+            celsius: 24
+            fahrenheit: 75.2
+      title: Add forecast request
+    ValidationFailedResponse:
       description: ''
       type: object
       x-examples:
@@ -214,4 +179,35 @@ components:
         - status
         - detail
         - validation_failures
+    Forecast:
+      description: ''
+      type: object
+      x-examples:
+        Forecast for 11th of November:
+          id: 299bee2f-bbf9-41f2-8b32-010482c6c8f5
+          day: '2020-11-19'
+          temperature:
+            celsius: 24
+            fahrenheit: 75.2
+      properties:
+        id:
+          type: string
+          minLength: 1
+        date:
+          type: string
+          minLength: 1
+        temperature:
+          type: object
+          required:
+            - celsius
+            - fahrenheit
+          properties:
+            celsius:
+              type: number
+            fahrenheit:
+              type: number
+      required:
+        - id
+        - date
+        - temperature
   securitySchemes: {}
