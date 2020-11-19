@@ -4,7 +4,7 @@ Forecaster gets daily forecast via Weather API for each city returned by Musemen
 
 ## Usage
 
-Get api key from https://www.weatherapi.com.
+Get api key from https://www.weatherapi.com and use it instead of API_KEY in cli command.
 
 Build container
 
