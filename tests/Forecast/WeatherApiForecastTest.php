@@ -9,7 +9,7 @@ use App\City\Coordinates;
 use App\Forecast\Days;
 use App\Forecast\FailedToGetForecast;
 use App\Forecast\Forecast;
-use App\Forecast\WeatherApiForecastInterface;
+use App\Forecast\Provider\WeatherApi\WeatherApiForecast;
 use App\JsonDecoder;
 use Generator;
 use GuzzleHttp\Client;
@@ -32,8 +32,8 @@ final class WeatherApiForecastTest extends TestCase
     ): void {
         $client = $this->getWeatherApiClient($city, $days, $response);
 
-        $forecasts = (new WeatherApiForecastInterface($client, new JsonDecoder()))
-            ->getForecasts($city, $days);
+        $forecasts = (new WeatherApiForecast($client, new JsonDecoder()))
+            ->getForecast($city, $days);
 
         $this->assertEquals($expected, $forecasts);
     }
@@ -47,7 +47,7 @@ final class WeatherApiForecastTest extends TestCase
             'forecast.json',
             [
                 'query' => [
-                    'q' => $city->name(),
+                    'q' => $city->getName(),
                     'days' => $days->get()
                 ]
             ]
@@ -104,8 +104,8 @@ final class WeatherApiForecastTest extends TestCase
 
         $this->expectException(FailedToGetForecast::class);
 
-        (new WeatherApiForecastInterface($client, new JsonDecoder()))
-            ->getForecasts(
+        (new WeatherApiForecast($client, new JsonDecoder()))
+            ->getForecast(
                 new City('::name::', new Coordinates(9, 9)),
                 new Days(1)
             );
@@ -121,8 +121,8 @@ final class WeatherApiForecastTest extends TestCase
 
         $this->expectException(FailedToGetForecast::class);
 
-        (new WeatherApiForecastInterface($client, new JsonDecoder()))
-            ->getForecasts(
+        (new WeatherApiForecast($client, new JsonDecoder()))
+            ->getForecast(
                 new City('::name::', new Coordinates(9, 9)),
                 new Days(1)
             );

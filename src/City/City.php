@@ -9,24 +9,24 @@ class City
     private string $name;
     private Coordinates $coordinates;
 
-    public function __construct(string $name, Coordinates $coordinates)
+    public function __construct(string $name, float $latitude, float $longitude)
     {
         $this->name = $name;
-        $this->coordinates = $coordinates;
+        $this->coordinates = new Coordinates($latitude, $longitude);
     }
 
-    public function name(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function coordinates(): Coordinates
+    public function getCoordinates(): Coordinates
     {
         return $this->coordinates;
     }
 
     public function __toString(): string
     {
-        return $this->name();
+        return $this->getName();
     }
 }

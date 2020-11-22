@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+        https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="App\City\City">
+        <attribute name="name">
+            <group>api.city.get</group>
+        </attribute>
+        <attribute name="latitude">
+            <group>api.city.get</group>
+        </attribute>
+        <attribute name="longitude">
+            <group>api.city.get</group>
+        </attribute>
+    </class>
+</serializer>

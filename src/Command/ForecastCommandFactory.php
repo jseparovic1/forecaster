@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Command;
 
-use App\City\CityProviderInterface;
-use App\Forecast\ForecastProviderInterface;
+use App\City\Provider\CityProviderInterface;
+use App\Forecast\Provider\ForecastProviderInterface;
 use Psr\Container\ContainerInterface;
 
 class ForecastCommandFactory

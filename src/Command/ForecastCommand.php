@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Command;
 
-use App\City\CityProviderInterface;
-use App\City\FailedToGetCities;
+use App\City\Provider\CityProviderInterface;
 use App\Forecast\Days;
-use App\Forecast\FailedToGetForecast;
-use App\Forecast\ForecastProviderInterface;
+use App\Forecast\Provider\ForecastProviderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 class ForecastCommand extends Command
 {
@@ -37,7 +36,7 @@ class ForecastCommand extends Command
     {
         try {
             $cities = $this->cities->getAll();
-        } catch (FailedToGetCities $exception) {
+        } catch (Throwable $exception) {
             $output->writeln($exception->getMessage());
 
             return Command::FAILURE;
@@ -45,17 +44,17 @@ class ForecastCommand extends Command
 
         foreach ($cities as $city) {
             try {
-                $forecasts = $this->forecasts->getForecasts($city, new Days(2));
-            } catch (FailedToGetForecast $exception) {
+                $forecast = $this->forecasts->getForecast($city, new Days(2));
+            } catch (Throwable $exception) {
                 $output->writeln(
-                    sprintf('Skipping city %s. %s', $exception->getCity(), $exception->getMessage())
+                    sprintf('Skipping city %s. %s', $city->name(), $exception->getMessage())
                 );
 
                 continue;
             }
 
             $output->writeln(
-                sprintf('Processed city %s | %s', $city, implode(', ', $forecasts))
+                sprintf('Processed city %s | %s', $city, $forecast)
             );
         }
 

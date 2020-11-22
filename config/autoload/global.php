@@ -10,5 +10,10 @@ return [
     'musement-api' => [
         'base_uri' => 'https://api.musement.com/api/v3/',
         'timeout' => 2,
+    ],
+    'normalization' => [
+        'metadata_directories' => [
+            __DIR__ . '/../../normalization'
+        ],
     ]
 ];

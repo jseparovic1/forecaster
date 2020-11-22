@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\City;
+namespace App\City\Provider\Musement;
 
-use App\JsonDecoder;
+use App\City\Provider\CachedCityProvider;
+use App\City\Provider\CityProviderInterface;
 use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final class MusementCitiesFactory
 {
@@ -17,7 +19,7 @@ final class MusementCitiesFactory
         $client = new Client($config);
 
         return new CachedCityProvider(
-            new MusementCities($client, new JsonDecoder())
+            new MusementCities($client, $container->get(SerializerInterface::class))
         );
     }
 }

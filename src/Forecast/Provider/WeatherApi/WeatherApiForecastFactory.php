@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Forecast;
+namespace App\Forecast\Provider\WeatherApi;
 
-use App\JsonDecoder;
+use App\Forecast\Provider\ForecastProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class WeatherApiForecastFactory
 {
@@ -40,6 +41,6 @@ class WeatherApiForecastFactory
             ]
         );
 
-        return new WeatherApiForecastInterface($client, new JsonDecoder());
+        return new WeatherApiForecast($client, $container->get(SerializerInterface::class));
     }
 }

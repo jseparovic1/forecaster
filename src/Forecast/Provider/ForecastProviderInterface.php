@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Forecast;
+namespace App\Forecast\Provider;
 
 use App\City\City;
+use App\Forecast\Days;
+use App\Forecast\Forecast;
 
 interface ForecastProviderInterface
 {
     /**
      * @param Days $days Number of days of weather forecast. Value ranges from 1 to 10
-     * @return array<Forecast>
      */
-    public function getForecasts(City $city, Days $days): array;
+    public function getForecast(City $city, Days $days): Forecast;
 }

@@ -6,15 +6,31 @@ namespace App\Forecast;
 
 class Forecast
 {
-    private string $condition;
+    /**
+     * @var ForecastDay[]
+     */
+    private array $forecasts;
 
-    public function __construct(string $condition)
+    public function __construct(array $forecasts)
     {
-        $this->condition = $condition;
+        $this->forecasts = $forecasts;
+    }
+
+    /**
+     * @return ForecastDay[]
+     */
+    public function getDaily(): array
+    {
+        return $this->forecasts;
     }
 
     public function __toString(): string
     {
-        return $this->condition;
+        $dailyForecasts = array_map(
+            fn(ForecastDay $day) => $day->getDay()->getCondition()->getText(),
+            $this->getDaily()
+        );
+
+        return implode('| ', $dailyForecasts);
     }
 }
