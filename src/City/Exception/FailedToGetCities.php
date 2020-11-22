@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\City;
+namespace App\City\Exception;
 
 use RuntimeException;
 

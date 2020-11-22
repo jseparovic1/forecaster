@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AppTest\Forecast;
 
-use App\City\City;
-use App\City\Coordinates;
-use App\Forecast\FailedToGetForecast;
-use App\Forecast\Forecast;
+use App\City\DataTransfer\City;
+use App\City\DataTransfer\Coordinates;
+use App\Forecast\DataTransfer\Forecast;
+use App\Forecast\Exception\FailedToGetForecast;
 use App\Forecast\Provider\RangeInDays;
 use App\Forecast\Provider\WeatherApi\WeatherApiForecast;
 use Generator;

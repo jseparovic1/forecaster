@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Forecast;
+namespace App\Forecast\Exception;
 
-use App\City\City;
+use App\City\DataTransfer\City;
 use RuntimeException;
 
 class FailedToGetForecast extends RuntimeException

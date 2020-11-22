@@ -47,7 +47,7 @@ class ForecastCommand extends Command
                 $forecast = $this->forecasts->getForecast($city, new RangeInDays(2));
             } catch (Throwable $exception) {
                 $output->writeln(
-                    sprintf('Skipping city %s. %s', $city->name(), $exception->getMessage())
+                    sprintf('Skipping city %s. %s', $city->getName(), $exception->getMessage())
                 );
 
                 continue;

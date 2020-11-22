@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace AppTest\City;
 
-use App\City\City;
-use App\City\Coordinates;
-use App\City\FailedToGetCities;
+use App\City\DataTransfer\City;
+use App\City\DataTransfer\Coordinates;
+use App\City\Exception\FailedToGetCities;
 use App\City\Provider\Musement\MusementCities;
 use Exception;
 use Generator;

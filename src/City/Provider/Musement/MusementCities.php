@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\City\Provider\Musement;
 
-use App\City\City;
-use App\City\FailedToGetCities;
+use App\City\DataTransfer\City;
+use App\City\Exception\FailedToGetCities;
 use App\City\Provider\CityProviderInterface;
 use GuzzleHttp\Client;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -34,10 +34,12 @@ final class MusementCities implements CityProviderInterface
             throw FailedToGetCities::because('Getting data from Musement API resulted in exception.');
         }
 
-        $body = $response->getBody()->getContents();
+        if ($response->getStatusCode() !== 200) {
+            throw FailedToGetCities::because($response->getReasonPhrase());
+        }
 
         return $this->serializer->deserialize(
-            $body,
+            $response->getBody()->getContents(),
             sprintf('%s[]', City::class),
             'json',
             [

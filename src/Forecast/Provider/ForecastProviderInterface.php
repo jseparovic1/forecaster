@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Forecast\Provider;
 
-use App\City\City;
-use App\Forecast\Forecast;
+use App\City\DataTransfer\City;
+use App\Forecast\DataTransfer\Forecast;
 
 interface ForecastProviderInterface
 {

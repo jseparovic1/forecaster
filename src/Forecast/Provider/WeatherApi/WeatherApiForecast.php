@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Forecast\Provider\WeatherApi;
 
-use App\City\City;
-use App\Forecast\FailedToGetForecast;
-use App\Forecast\Forecast;
+use App\City\DataTransfer\City;
+use App\Forecast\DataTransfer\Forecast;
+use App\Forecast\Exception\FailedToGetForecast;
 use App\Forecast\Provider\ForecastProviderInterface;
 use App\Forecast\Provider\RangeInDays;
 use GuzzleHttp\Client;
@@ -39,6 +39,10 @@ class WeatherApiForecast implements ForecastProviderInterface
             );
         } catch (Throwable $exception) {
             throw FailedToGetForecast::for($city, 'Accessing Weather API resulted in error.');
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw FailedToGetForecast::fromApiData($city, $response->getReasonPhrase());
         }
 
         $body = json_decode($response->getBody()->getContents(), true);

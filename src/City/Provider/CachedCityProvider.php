@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\City\Provider;
 
-use App\City\City;
+use App\City\DataTransfer\City;
 
 class CachedCityProvider implements CityProviderInterface
 {
