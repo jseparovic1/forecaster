@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-interface Decoder
+interface DecoderInterface
 {
     /**
      * @return array<mixed>

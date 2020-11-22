@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
 
 final class MusementCitiesFactory
 {
-    public function __invoke(ContainerInterface $container): CityProvider
+    public function __invoke(ContainerInterface $container): CityProviderInterface
     {
         $config = $container->get('config')['musement-api'];
 

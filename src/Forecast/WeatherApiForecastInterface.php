@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Forecast;
 
 use App\City\City;
-use App\Decoder;
+use App\DecoderInterface;
 use GuzzleHttp\Client;
 use Throwable;
 
-class WeatherApiForecast implements ForecastProvider
+class WeatherApiForecastInterface implements ForecastProviderInterface
 {
     private Client $client;
-    private Decoder $decoder;
+    private DecoderInterface $decoder;
 
-    public function __construct(Client $client, Decoder $decoder)
+    public function __construct(Client $client, DecoderInterface $decoder)
     {
         $this->client = $client;
         $this->decoder = $decoder;

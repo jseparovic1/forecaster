@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\City\CityProvider;
+use App\City\CityProviderInterface;
 use App\City\MusementCitiesFactory;
-use App\Forecast\ForecastProvider;
+use App\Forecast\ForecastProviderInterface;
 use App\Forecast\WeatherApiForecastFactory;
 
 class Configuration
@@ -23,8 +23,8 @@ class Configuration
             'dependencies' => [
                 'factories' => [
                     ForecastCommand::class => ForecastCommandFactory::class,
-                    CityProvider::class => MusementCitiesFactory::class,
-                    ForecastProvider::class => WeatherApiForecastFactory::class
+                    CityProviderInterface::class => MusementCitiesFactory::class,
+                    ForecastProviderInterface::class => WeatherApiForecastFactory::class
                 ],
             ],
         ];

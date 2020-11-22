@@ -6,7 +6,7 @@ namespace App\Forecast;
 
 use App\City\City;
 
-interface ForecastProvider
+interface ForecastProviderInterface
 {
     /**
      * @param Days $days Number of days of weather forecast. Value ranges from 1 to 10

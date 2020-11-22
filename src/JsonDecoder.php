@@ -6,7 +6,7 @@ namespace App;
 
 use function json_decode;
 
-class JsonDecoder implements Decoder
+class JsonDecoder implements DecoderInterface
 {
     private int $options = JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR;
 

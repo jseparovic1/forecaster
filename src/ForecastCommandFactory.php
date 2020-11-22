@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\City\CityProvider;
-use App\Forecast\ForecastProvider;
+use App\City\CityProviderInterface;
+use App\Forecast\ForecastProviderInterface;
 use Psr\Container\ContainerInterface;
 
 class ForecastCommandFactory
@@ -13,8 +13,8 @@ class ForecastCommandFactory
     public function __invoke(ContainerInterface $container): ForecastCommand
     {
         return new ForecastCommand(
-            $container->get(CityProvider::class),
-            $container->get(ForecastProvider::class)
+            $container->get(CityProviderInterface::class),
+            $container->get(ForecastProviderInterface::class)
         );
     }
 }

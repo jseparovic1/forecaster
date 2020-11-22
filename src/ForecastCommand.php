@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\City\CityProvider;
+use App\City\CityProviderInterface;
 use App\City\FailedToGetCities;
 use App\Forecast\Days;
 use App\Forecast\FailedToGetForecast;
-use App\Forecast\ForecastProvider;
+use App\Forecast\ForecastProviderInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,10 +17,10 @@ class ForecastCommand extends Command
 {
     public const NAME = 'cities:forecast';
 
-    private CityProvider $cities;
-    private ForecastProvider $forecasts;
+    private CityProviderInterface $cities;
+    private ForecastProviderInterface $forecasts;
 
-    public function __construct(CityProvider $cities, ForecastProvider $forecasts)
+    public function __construct(CityProviderInterface $cities, ForecastProviderInterface $forecasts)
     {
         parent::__construct(self::NAME);
 

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\City;
 
-use App\Decoder;
+use App\DecoderInterface;
 use GuzzleHttp\Client;
 use Throwable;
 
-final class MusementCities implements CityProvider
+final class MusementCities implements CityProviderInterface
 {
     private Client $client;
-    private Decoder $decoder;
+    private DecoderInterface $decoder;
 
-    public function __construct(Client $client, Decoder $decoder)
+    public function __construct(Client $client, DecoderInterface $decoder)
     {
         $this->client = $client;
         $this->decoder = $decoder;

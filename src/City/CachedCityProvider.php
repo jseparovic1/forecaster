@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\City;
 
-class CachedCityProvider implements CityProvider
+class CachedCityProvider implements CityProviderInterface
 {
     /** @var array<City>|null */
     private ?array $cache = null;
 
-    private CityProvider $decorated;
+    private CityProviderInterface $decorated;
 
-    public function __construct(CityProvider $decorated)
+    public function __construct(CityProviderInterface $decorated)
     {
         $this->decorated = $decorated;
     }
