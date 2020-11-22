@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Forecast\Provider\WeatherApi;
 
 use App\City\City;
-use App\Forecast\Days;
 use App\Forecast\FailedToGetForecast;
 use App\Forecast\Forecast;
 use App\Forecast\Provider\ForecastProviderInterface;
+use App\Forecast\Provider\RangeInDays;
 use GuzzleHttp\Client;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -25,7 +25,7 @@ class WeatherApiForecast implements ForecastProviderInterface
         $this->serializer = $serializer;
     }
 
-    public function getForecast(City $city, Days $days): Forecast
+    public function getForecast(City $city, RangeInDays $days): Forecast
     {
         try {
             $response = $this->client->get(

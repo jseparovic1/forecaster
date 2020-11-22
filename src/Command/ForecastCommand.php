@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\City\Provider\CityProviderInterface;
-use App\Forecast\Days;
 use App\Forecast\Provider\ForecastProviderInterface;
+use App\Forecast\Provider\RangeInDays;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -44,7 +44,7 @@ class ForecastCommand extends Command
 
         foreach ($cities as $city) {
             try {
-                $forecast = $this->forecasts->getForecast($city, new Days(2));
+                $forecast = $this->forecasts->getForecast($city, new RangeInDays(2));
             } catch (Throwable $exception) {
                 $output->writeln(
                     sprintf('Skipping city %s. %s', $city->name(), $exception->getMessage())

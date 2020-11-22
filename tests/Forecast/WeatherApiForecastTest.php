@@ -6,11 +6,10 @@ namespace AppTest\Forecast;
 
 use App\City\City;
 use App\City\Coordinates;
-use App\Forecast\Days;
 use App\Forecast\FailedToGetForecast;
 use App\Forecast\Forecast;
+use App\Forecast\Provider\RangeInDays;
 use App\Forecast\Provider\WeatherApi\WeatherApiForecast;
-use App\JsonDecoder;
 use Generator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
@@ -26,7 +25,7 @@ final class WeatherApiForecastTest extends TestCase
      */
     public function test_it_gets_daily_forecast_for_city(
         City $city,
-        Days $days,
+        RangeInDays $days,
         string $response,
         array $expected
     ): void {
@@ -38,7 +37,7 @@ final class WeatherApiForecastTest extends TestCase
         $this->assertEquals($expected, $forecasts);
     }
 
-    private function getWeatherApiClient(City $city, Days $days, string $rawResponse): Client
+    private function getWeatherApiClient(City $city, RangeInDays $days, string $rawResponse): Client
     {
         $response = new Response(200, [], $rawResponse);
 
@@ -85,7 +84,7 @@ final class WeatherApiForecastTest extends TestCase
 
         yield 'It gets 2 day forecasts for Milano' => [
             new City('Milano', new Coordinates(43.51, 16.45)),
-            new Days(2),
+            new RangeInDays(2),
             $createResponse('Partly cloudy', 'Raining'),
             [
                 new Forecast('Partly cloudy'),
@@ -107,7 +106,7 @@ final class WeatherApiForecastTest extends TestCase
         (new WeatherApiForecast($client, new JsonDecoder()))
             ->getForecast(
                 new City('::name::', new Coordinates(9, 9)),
-                new Days(1)
+                new RangeInDays(1)
             );
     }
 
@@ -124,7 +123,7 @@ final class WeatherApiForecastTest extends TestCase
         (new WeatherApiForecast($client, new JsonDecoder()))
             ->getForecast(
                 new City('::name::', new Coordinates(9, 9)),
-                new Days(1)
+                new RangeInDays(1)
             );
     }
 }

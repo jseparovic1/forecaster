@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Forecast;
+namespace App\Forecast\Provider;
 
-final class Days
+final class RangeInDays
 {
     private int $days;
 
