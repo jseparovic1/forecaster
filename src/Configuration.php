@@ -13,7 +13,7 @@ use App\Forecast\Provider\WeatherApi\WeatherApiForecastFactory;
 use App\Serializer\ObjectNormalizerFactory;
 use App\Serializer\SerializerFactory;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 class Configuration
 {
@@ -28,7 +28,7 @@ class Configuration
             ],
             'dependencies' => [
                 'factories' => [
-                    SerializerInterface::class => SerializerFactory::class,
+                    Serializer::class => SerializerFactory::class,
                     ForecastCommand::class => ForecastCommandFactory::class,
                     CityProviderInterface::class => MusementCitiesFactory::class,
                     ForecastProviderInterface::class => WeatherApiForecastFactory::class,

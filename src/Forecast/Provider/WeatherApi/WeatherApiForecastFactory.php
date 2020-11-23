@@ -10,7 +10,7 @@ use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
 
 class WeatherApiForecastFactory
 {
@@ -41,6 +41,6 @@ class WeatherApiForecastFactory
             ]
         );
 
-        return new WeatherApiForecast($client, $container->get(SerializerInterface::class));
+        return new WeatherApiForecast($client, $container->get(Serializer::class));
     }
 }

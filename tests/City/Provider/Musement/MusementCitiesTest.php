@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace AppTest\City;
+namespace AppTest\City\Provider\Musement;
 
 use App\City\DataTransfer\City;
-use App\City\DataTransfer\Coordinates;
 use App\City\Exception\FailedToGetCities;
 use App\City\Provider\Musement\MusementCities;
+use AppTest\ExternalClientTestCase;
 use Exception;
 use Generator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-final class MusementCitiesTest extends TestCase
+final class MusementCitiesTest extends ExternalClientTestCase
 {
     use ProphecyTrait;
 
@@ -26,7 +25,7 @@ final class MusementCitiesTest extends TestCase
     {
         $client = $this->getMusementClient($response);
 
-        $cities = (new MusementCities($client, new JsonDecoder()))->getAll();
+        $cities = (new MusementCities($client, $this->getSerializer()))->getAll();
 
         $this->assertEquals($expected, $cities);
     }
@@ -59,8 +58,8 @@ final class MusementCitiesTest extends TestCase
                 ],
             ),
             [
-                new City('Split', new Coordinates(43.51, 16.45)),
-                new City('Milano', new Coordinates(45.5, 9.1))
+                new City('Split', 43.51, 16.45),
+                new City('Milano', 45.5, 9.1)
             ]
         ];
 
@@ -78,7 +77,7 @@ final class MusementCitiesTest extends TestCase
                 ],
             ),
             [
-                new City('Milano', new Coordinates(45.5, 9.1))
+                new City('Milano', 45.5, 9.1)
             ]
         ];
 
@@ -98,7 +97,7 @@ final class MusementCitiesTest extends TestCase
                 ],
             ),
             [
-                new City('Milano', new Coordinates(45.5, 9.1))
+                new City('Milano', 45.5, 9.1)
             ]
         ];
     }
@@ -111,6 +110,6 @@ final class MusementCitiesTest extends TestCase
 
         $this->expectException(FailedToGetCities::class);
 
-        (new MusementCities($client, new JsonDecoder()))->getAll();
+        (new MusementCities($client, $this->getSerializer()))->getAll();
     }
 }

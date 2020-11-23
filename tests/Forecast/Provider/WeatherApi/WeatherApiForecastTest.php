@@ -2,21 +2,20 @@
 
 declare(strict_types=1);
 
-namespace AppTest\Forecast;
+namespace AppTest\Forecast\Provider\WeatherApi;
 
 use App\City\DataTransfer\City;
-use App\City\DataTransfer\Coordinates;
 use App\Forecast\DataTransfer\Forecast;
 use App\Forecast\Exception\FailedToGetForecast;
 use App\Forecast\Provider\RangeInDays;
 use App\Forecast\Provider\WeatherApi\WeatherApiForecast;
+use AppTest\ExternalClientTestCase;
 use Generator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-final class WeatherApiForecastTest extends TestCase
+final class WeatherApiForecastTest extends ExternalClientTestCase
 {
     use ProphecyTrait;
 
@@ -31,7 +30,7 @@ final class WeatherApiForecastTest extends TestCase
     ): void {
         $client = $this->getWeatherApiClient($city, $days, $response);
 
-        $forecasts = (new WeatherApiForecast($client, new JsonDecoder()))
+        $forecasts = (new WeatherApiForecast($client, $this->getSerializer()))
             ->getForecast($city, $days);
 
         $this->assertEquals($expected, $forecasts);
@@ -83,7 +82,7 @@ final class WeatherApiForecastTest extends TestCase
         };
 
         yield 'It gets 2 day forecasts for Milano' => [
-            new City('Milano', new Coordinates(43.51, 16.45)),
+            new City('Milano', 43.51, 16.45),
             new RangeInDays(2),
             $createResponse('Partly cloudy', 'Raining'),
             [
@@ -103,9 +102,9 @@ final class WeatherApiForecastTest extends TestCase
 
         $this->expectException(FailedToGetForecast::class);
 
-        (new WeatherApiForecast($client, new JsonDecoder()))
+        (new WeatherApiForecast($client, $this->getSerializer()))
             ->getForecast(
-                new City('::name::', new Coordinates(9, 9)),
+                new City('::name::', 9, 9),
                 new RangeInDays(1)
             );
     }
@@ -120,9 +119,9 @@ final class WeatherApiForecastTest extends TestCase
 
         $this->expectException(FailedToGetForecast::class);
 
-        (new WeatherApiForecast($client, new JsonDecoder()))
+        (new WeatherApiForecast($client, $this->getSerializer()))
             ->getForecast(
-                new City('::name::', new Coordinates(9, 9)),
+                new City('::name::', 9, 9),
                 new RangeInDays(1)
             );
     }
