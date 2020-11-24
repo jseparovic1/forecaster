@@ -11,6 +11,9 @@ class Forecast
      */
     private array $forecasts;
 
+    /**
+     * @param ForecastDay[] $forecasts
+     */
     public function __construct(array $forecasts)
     {
         $this->forecasts = $forecasts;
@@ -31,6 +34,6 @@ class Forecast
             $this->getDaily()
         );
 
-        return implode('| ', $dailyForecasts);
+        return implode(' | ', $dailyForecasts);
     }
 }

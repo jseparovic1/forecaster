@@ -47,14 +47,18 @@ class WeatherApiForecast implements ForecastProviderInterface
 
         $body = json_decode($response->getBody()->getContents(), true);
 
-        $forecast = $this->serializer->denormalize(
-            $body['forecast'] ?? null,
-            Forecast::class,
-            null,
-            [
-                AbstractNormalizer::GROUPS => 'api.forecast.get',
-            ]
-        );
+        try {
+            $forecast = $this->serializer->denormalize(
+                $body['forecast'] ?? null,
+                Forecast::class,
+                null,
+                [
+                    AbstractNormalizer::GROUPS => 'api.forecast.get',
+                ]
+            );
+        } catch (Throwable $exception) {
+            throw FailedToGetForecast::for($city, 'Invalid forecast data received from API.');
+        }
 
         assert($forecast instanceof Forecast);
 

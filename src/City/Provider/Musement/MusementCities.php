@@ -9,15 +9,15 @@ use App\City\Exception\FailedToGetCities;
 use App\City\Provider\CityProviderInterface;
 use GuzzleHttp\Client;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Serializer;
 use Throwable;
 
 final class MusementCities implements CityProviderInterface
 {
     private Client $client;
-    private SerializerInterface $serializer;
+    private Serializer $serializer;
 
-    public function __construct(Client $client, SerializerInterface $serializer)
+    public function __construct(Client $client, Serializer $serializer)
     {
         $this->client = $client;
         $this->serializer = $serializer;
@@ -38,13 +38,28 @@ final class MusementCities implements CityProviderInterface
             throw FailedToGetCities::because($response->getReasonPhrase());
         }
 
-        return $this->serializer->deserialize(
-            $response->getBody()->getContents(),
-            sprintf('%s[]', City::class),
-            'json',
-            [
-                AbstractNormalizer::GROUPS => 'api.city.get'
-            ]
-        );
+        $body = json_decode($response->getBody()->getContents(), true);
+
+        $cities = [];
+
+        foreach ($body as $cityData) {
+            try {
+                $city = $this->serializer->denormalize(
+                    $cityData,
+                    City::class,
+                    null,
+                    [
+                        AbstractNormalizer::GROUPS => 'api.city.get'
+                    ]
+                );
+
+                assert($city instanceof City);
+                $cities[] = $city;
+            } catch (Throwable $exception) {
+                // Skip invalid records...
+            }
+        }
+
+        return $cities;
     }
 }

@@ -44,6 +44,9 @@ class ObjectNormalizerFactory
         );
     }
 
+    /**
+     * @param string[] $directories
+     */
     private function getLoader(array $directories): LoaderInterface
     {
         /** @var LoaderInterface[] $loaders */

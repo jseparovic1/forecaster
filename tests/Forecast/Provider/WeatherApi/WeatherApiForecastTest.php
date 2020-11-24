@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AppTest\Forecast\Provider\WeatherApi;
 
 use App\City\DataTransfer\City;
-use App\Forecast\DataTransfer\Forecast;
+use App\Forecast\DataTransfer\ForecastDay;
 use App\Forecast\Exception\FailedToGetForecast;
 use App\Forecast\Provider\RangeInDays;
 use App\Forecast\Provider\WeatherApi\WeatherApiForecast;
@@ -30,10 +30,17 @@ final class WeatherApiForecastTest extends ExternalClientTestCase
     ): void {
         $client = $this->getWeatherApiClient($city, $days, $response);
 
-        $forecasts = (new WeatherApiForecast($client, $this->getSerializer()))
+        $forecast = (new WeatherApiForecast($client, $this->getSerializer()))
             ->getForecast($city, $days);
 
-        $this->assertEquals($expected, $forecasts);
+
+        $this->assertEquals(
+            $expected,
+            array_map(
+                fn(ForecastDay $day) => $day->getDay()->getCondition()->getText(),
+                $forecast->getDaily()
+            )
+        );
     }
 
     private function getWeatherApiClient(City $city, RangeInDays $days, string $rawResponse): Client
@@ -56,38 +63,13 @@ final class WeatherApiForecastTest extends ExternalClientTestCase
 
     public function getWeatherApiForecastExceptions(): Generator
     {
-        $createResponse = function (string $firstDayCondition, string $secondDayCondition): string {
-            return json_encode(
-                [
-                    'forecast' => [
-                        'forecastday' => [
-                            [
-                                'day' => [
-                                    'condition' => [
-                                        'text' => $firstDayCondition
-                                    ]
-                                ]
-                            ],
-                            [
-                                'day' => [
-                                    'condition' => [
-                                        'text' => $secondDayCondition
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            );
-        };
-
         yield 'It gets 2 day forecasts for Milano' => [
             new City('Milano', 43.51, 16.45),
             new RangeInDays(2),
-            $createResponse('Partly cloudy', 'Raining'),
+            file_get_contents(__DIR__ . '/get.milan-two-day-forecast.success.json'),
             [
-                new Forecast('Partly cloudy'),
-                new Forecast('Raining')
+                'Partly cloudy',
+                'Partly cloudy'
             ]
         ];
     }

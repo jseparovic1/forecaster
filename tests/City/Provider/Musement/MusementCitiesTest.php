@@ -43,61 +43,18 @@ final class MusementCitiesTest extends ExternalClientTestCase
     public function getMusementCitiesClientExpectations(): Generator
     {
         yield 'It gets cities' => [
-            json_encode(
-                [
-                    [
-                        'name' => 'Split',
-                        'latitude' => 43.51,
-                        'longitude' => 16.45,
-                    ],
-                    [
-                        'name' => 'Milano',
-                        'latitude' => 45.5,
-                        'longitude' => 9.1,
-                    ]
-                ],
-            ),
+            file_get_contents(__DIR__ . '/get.cities.success.json'),
             [
-                new City('Split', 43.51, 16.45),
-                new City('Milano', 45.5, 9.1)
+                new City('Amsterdam', 52.374, 4.9,),
+                new City('Paris', 48.866, 2.355)
             ]
         ];
 
-        yield 'It it skips cities without coordinates' => [
-            json_encode(
-                [
-                    [
-                        'name' => 'Skip me',
-                    ],
-                    [
-                        'name' => 'Milano',
-                        'latitude' => 45.5,
-                        'longitude' => 9.1,
-                    ]
-                ],
-            ),
-            [
-                new City('Milano', 45.5, 9.1)
-            ]
-        ];
 
-        yield 'It it skips cities without name' => [
-            json_encode(
-                [
-                    [
-                        // Missing city name.
-                        'latitude' => 43.51,
-                        'longitude' => 16.45,
-                    ],
-                    [
-                        'name' => 'Milano',
-                        'latitude' => 45.5,
-                        'longitude' => 9.1,
-                    ]
-                ],
-            ),
+        yield 'It it skips cities with unexpected data' => [
+            file_get_contents(__DIR__ . '/get.cities.without-name.json'),
             [
-                new City('Milano', 45.5, 9.1)
+                new City('Paris', 48.866, 2.355)
             ]
         ];
     }

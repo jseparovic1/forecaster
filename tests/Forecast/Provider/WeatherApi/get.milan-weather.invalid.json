@@ -1,0 +1,44 @@
+{
+    "location": {
+        "name": "Milan",
+        "region": "Lombardia",
+        "country": "Italy",
+        "lat": 45.47,
+        "lon": 9.2,
+        "tz_id": "Europe/Rome",
+        "localtime_epoch": 1606241007,
+        "localtime": "2020-11-24 19:03"
+    },
+    "forecast": {
+        "forecastday": [
+            {
+                "date": "2020-11-24",
+                "date_epoch": 1606176000,
+                "day": {
+                    "maxtemp_c": 11.1,
+                    "maxtemp_f": 52.0,
+                    "mintemp_c": 5.0,
+                    "mintemp_f": 41.0,
+                    "avgtemp_c": 7.9,
+                    "avgtemp_f": 46.2,
+                    "maxwind_mph": 4.0,
+                    "maxwind_kph": 6.5,
+                    "totalprecip_mm": 0.0,
+                    "totalprecip_in": 0.0,
+                    "avgvis_km": 10.0,
+                    "avgvis_miles": 6.0,
+                    "avghumidity": 56.0,
+                    "daily_will_it_rain": 0,
+                    "daily_chance_of_rain": "0",
+                    "daily_chance_of_snow": "0",
+                    "condition": {
+                        "text": "Partly cloudy",
+                        "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+                        "code": 1003
+                    },
+                    "uv": 1.0
+                },
+            }
+        ]
+    }
+}

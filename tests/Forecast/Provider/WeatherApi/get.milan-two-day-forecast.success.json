@@ -1,0 +1,546 @@
+{
+    "location": {
+        "name": "Milan",
+        "region": "Lombardia",
+        "country": "Italy",
+        "lat": 45.47,
+        "lon": 9.2,
+        "tz_id": "Europe/Rome",
+        "localtime_epoch": 1606241146,
+        "localtime": "2020-11-24 19:05"
+    },
+    "current": {
+        "last_updated_epoch": 1606239012,
+        "last_updated": "2020-11-24 18:30",
+        "temp_c": 6.0,
+        "temp_f": 42.8,
+        "is_day": 1,
+        "condition": {
+            "text": "Sunny",
+            "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
+            "code": 1000
+        },
+        "wind_mph": 0.0,
+        "wind_kph": 0.0,
+        "wind_degree": 225,
+        "wind_dir": "SW",
+        "pressure_mb": 1026.0,
+        "pressure_in": 30.8,
+        "precip_mm": 0.0,
+        "precip_in": 0.0,
+        "humidity": 75,
+        "cloud": 0,
+        "feelslike_c": 6.0,
+        "feelslike_f": 42.8,
+        "vis_km": 10.0,
+        "vis_miles": 6.0,
+        "uv": 4.0,
+        "gust_mph": 1.6,
+        "gust_kph": 2.5
+    },
+    "forecast": {
+        "forecastday": [
+            {
+                "date": "2020-11-24",
+                "date_epoch": 1606176000,
+                "day": {
+                    "maxtemp_c": 11.1,
+                    "maxtemp_f": 52.0,
+                    "mintemp_c": 5.0,
+                    "mintemp_f": 41.0,
+                    "avgtemp_c": 7.9,
+                    "avgtemp_f": 46.2,
+                    "maxwind_mph": 4.0,
+                    "maxwind_kph": 6.5,
+                    "totalprecip_mm": 0.0,
+                    "totalprecip_in": 0.0,
+                    "avgvis_km": 10.0,
+                    "avgvis_miles": 6.0,
+                    "avghumidity": 56.0,
+                    "daily_will_it_rain": 0,
+                    "daily_chance_of_rain": "0",
+                    "daily_chance_of_snow": "0",
+                    "condition": {
+                        "text": "Partly cloudy",
+                        "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+                        "code": 1003
+                    },
+                    "uv": 1.0
+                },
+                "astro": {
+
+                },
+                "hour": [
+                    {
+                        "time": "2020-11-24 00:00",
+                        "temp_c": 5.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 01:00",
+                        "temp_c": 5.8,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 02:00",
+                        "temp_c": 5.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 03:00",
+                        "temp_c": 5.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 04:00",
+                        "temp_c": 6.0,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 05:00",
+                        "temp_c": 5.7,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 06:00",
+                        "temp_c": 5.3,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 07:00",
+                        "temp_c": 5.0,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 08:00",
+                        "temp_c": 5.8,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 09:00",
+                        "temp_c": 6.5,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 10:00",
+                        "temp_c": 7.3,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 11:00",
+                        "temp_c": 8.4,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 12:00",
+                        "temp_c": 9.4,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 13:00",
+                        "temp_c": 10.5,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 14:00",
+                        "temp_c": 10.7,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 15:00",
+                        "temp_c": 10.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 16:00",
+                        "temp_c": 11.1,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 17:00",
+                        "temp_c": 10.5,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 18:00",
+                        "temp_c": 9.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 19:00",
+                        "temp_c": 9.3,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 20:00",
+                        "temp_c": 8.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 21:00",
+                        "temp_c": 8.6,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 22:00",
+                        "temp_c": 8.2,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-24 23:00",
+                        "temp_c": 8.2,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    }
+                ]
+            },
+            {
+                "date": "2020-11-25",
+                "date_epoch": 1606262400,
+                "day": {
+                    "maxtemp_c": 11.4,
+                    "maxtemp_f": 52.5,
+                    "mintemp_c": 6.0,
+                    "mintemp_f": 42.8,
+                    "avgtemp_c": 8.9,
+                    "avgtemp_f": 48.0,
+                    "maxwind_mph": 2.2,
+                    "maxwind_kph": 3.6,
+                    "totalprecip_mm": 0.0,
+                    "totalprecip_in": 0.0,
+                    "avgvis_km": 10.0,
+                    "avgvis_miles": 6.0,
+                    "avghumidity": 62.0,
+                    "daily_will_it_rain": 0,
+                    "daily_chance_of_rain": "0",
+                    "daily_chance_of_snow": "0",
+                    "condition": {
+                        "text": "Partly cloudy",
+                        "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png",
+                        "code": 1003
+                    },
+                    "uv": 1.0
+                },
+                "astro": {
+
+                },
+                "hour": [
+                    {
+                        "time": "2020-11-25 00:00",
+                        "temp_c": 8.2,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 01:00",
+                        "temp_c": 8.2,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 02:00",
+                        "temp_c": 7.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 03:00",
+                        "temp_c": 7.6,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 04:00",
+                        "temp_c": 7.3,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 05:00",
+                        "temp_c": 6.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 06:00",
+                        "temp_c": 6.4,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 07:00",
+                        "temp_c": 6.0,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 08:00",
+                        "temp_c": 6.7,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 09:00",
+                        "temp_c": 7.4,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 10:00",
+                        "temp_c": 8.1,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 11:00",
+                        "temp_c": 9.2,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 12:00",
+                        "temp_c": 10.3,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 13:00",
+                        "temp_c": 11.4,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 14:00",
+                        "temp_c": 11.4,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 15:00",
+                        "temp_c": 11.3,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 16:00",
+                        "temp_c": 11.3,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 17:00",
+                        "temp_c": 10.8,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 18:00",
+                        "temp_c": 10.4,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 19:00",
+                        "temp_c": 9.9,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 20:00",
+                        "temp_c": 9.5,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 21:00",
+                        "temp_c": 9.2,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 22:00",
+                        "temp_c": 8.8,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    },
+                    {
+                        "time": "2020-11-25 23:00",
+                        "temp_c": 8.0,
+                        "condition": {
+
+                        },
+                        "will_it_rain": 0,
+                        "will_it_snow": 0
+                    }
+                ]
+            }
+        ]
+    },
+    "alert": {
+
+    }
+}

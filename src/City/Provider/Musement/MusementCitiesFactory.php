@@ -19,7 +19,10 @@ final class MusementCitiesFactory
         $client = new Client($config);
 
         return new CachedCityProvider(
-            new MusementCities($client, $container->get(Serializer::class))
+            new MusementCities(
+                $client,
+                $container->get(Serializer::class)
+            )
         );
     }
 }
