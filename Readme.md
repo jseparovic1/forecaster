@@ -47,9 +47,7 @@ that stores response in array
 ## Quality assurance 
 Use following command to run tests and check static analysis errors.
 
-```bash
     docker run --rm jseparovic/forecaster composer check
-```
 
 Run test only
 
