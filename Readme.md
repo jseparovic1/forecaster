@@ -57,3 +57,10 @@ Run phpstan check only
 
     docker run --rm jseparovic/forecaster composer stan-check
 
+## Api design task
+
+Api design is provided as OpenAPI v3 specification located in [docs](/docs/Forecast.v1.yaml) folder.
+OpenAPI specification was written using [Stoplight Studio](https://stoplight.io/studio/).
+
+ 
+
