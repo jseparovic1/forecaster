@@ -30,17 +30,17 @@ that stores response in array
  
 ## Usage
 
-Get api key from https://www.weatherapi.com and use it instead of API_KEY in cli command.
+1. Get api key from https://www.weatherapi.com and use it instead of API_KEY in cli command.
 
-Build application container
+2. Build 
 
     docker build -t jseparovic/forecaster .
 
-Run container
+3. Run 
 
     docker run --rm -it -e WEATHER_API_KEY='API_KEY' jseparovic/forecaster composer cities:forecasts
 
-For development install and add dependencies to host
+**For development install and add dependencies to host**
 
     docker run --rm --interactive --tty --volume $PWD:/app composer install
 
