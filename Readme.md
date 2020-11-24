@@ -7,9 +7,9 @@ maintainable code.
 ## Aplicaiton logic
 ![Forecaster flow](forecaster.png "Forecaster flow")
 
-## Technical decisions
+## Arhitecture
 This project uses set of components to solve the given problem. Goal is to demonstrate clear understanding of underlying 
-components and concepts that are abstracted in modern frameworks.
+components and concepts that are abstracted in typical modern frameworks.
 
 Libraries chosen for this project: 
 - [laminas/laminas-config-aggregator](https://github.com/laminas/laminas-config-aggregato) for application config
@@ -19,14 +19,14 @@ Libraries chosen for this project:
 - [phpstan/phpstan](https://github.com/phpstan/phpstan) for static analysis
 - [phpunit/phpunit](https://phpunit.de/) for writing application tests
 
-**Technical decisions**
+**Decisions**
 - Each data providers (MusementAPI, WeatherAPI) is abstracted behind interface to make changing providers and testing easier
-- Api calls could be cached for a certain amount of time. 
+- Api calls could be cached for a certain amount of time 
 As an example MusementProvider is decorated with (CachedCityProvider)[https://github.com/jseparovic1/forecaster/blob/master/src/City/Provider/CachedCityProvider.php]
-that stores response in array.
+that stores response in array
 - Symfony serializer is used to map api response data to dedicated data transfer classes 
-- Custom application exceptions are used for easier error debugging and understandable application flow 
-- All exceptions, invalid api responses and important events in application should be logged  
+- Custom application exceptions are created for easier error debugging and understandable application flow 
+- All exceptions, invalid api responses and important events in application should be logged in real application but it is skipped here  
  
 ## Usage
 
