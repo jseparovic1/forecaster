@@ -43,7 +43,7 @@ final class MusementCitiesTest extends ExternalClientTestCase
     public function getMusementCitiesClientExpectations(): Generator
     {
         yield 'It gets cities' => [
-            file_get_contents(__DIR__ . '/get.cities.success.json'),
+            $this->getResponseContent(__DIR__ . '/get.cities.success.json'),
             [
                 new City('Amsterdam', 52.374, 4.9,),
                 new City('Paris', 48.866, 2.355)
@@ -52,7 +52,7 @@ final class MusementCitiesTest extends ExternalClientTestCase
 
 
         yield 'It it skips cities with unexpected data' => [
-            file_get_contents(__DIR__ . '/get.cities.without-name.json'),
+            $this->getResponseContent(__DIR__ . '/get.cities.without-name.json'),
             [
                 new City('Paris', 48.866, 2.355)
             ]

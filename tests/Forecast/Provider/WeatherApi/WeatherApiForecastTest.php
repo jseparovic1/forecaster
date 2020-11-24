@@ -66,7 +66,7 @@ final class WeatherApiForecastTest extends ExternalClientTestCase
         yield 'It gets 2 day forecasts for Milano' => [
             new City('Milano', 43.51, 16.45),
             new RangeInDays(2),
-            file_get_contents(__DIR__ . '/get.milan-two-day-forecast.success.json'),
+            $this->getResponseContent(__DIR__ . '/get.milan-two-day-forecast.success.json'),
             [
                 'Partly cloudy',
                 'Partly cloudy'
