@@ -22,7 +22,7 @@ Libraries chosen for this project:
 **Decisions**
 - Each data providers (MusementAPI, WeatherAPI) is abstracted behind interface to make changing providers and testing easier
 - Api calls could be cached for a certain amount of time 
-As an example MusementProvider is decorated with (CachedCityProvider)[https://github.com/jseparovic1/forecaster/blob/master/src/City/Provider/CachedCityProvider.php]
+As an example MusementProvider is decorated with [CachedCityProvider](https://github.com/jseparovic1/forecaster/blob/master/src/City/Provider/CachedCityProvider.php)
 that stores response in array
 - Symfony serializer is used to map api response data to dedicated data transfer classes 
 - Custom application exceptions are created for easier error debugging and understandable application flow 
