@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AppTest\City\Provider\Musement;
 
-use App\City\DataTransfer\City;
+use App\City\DTO\CityDTO;
 use App\City\Exception\FailedToGetCitiesException;
 use App\City\Provider\Musement\MusementCitiesProvider;
 use AppTest\ExternalClientTestCase;
@@ -45,8 +45,8 @@ final class MusementCitiesProviderTest extends ExternalClientTestCase
         yield 'It gets cities' => [
             $this->getResponseContent(__DIR__ . '/get.cities.success.json'),
             [
-                new City('Amsterdam', 52.374, 4.9,),
-                new City('Paris', 48.866, 2.355)
+                new CityDTO('Amsterdam', 52.374, 4.9,),
+                new CityDTO('Paris', 48.866, 2.355)
             ]
         ];
 
@@ -54,7 +54,7 @@ final class MusementCitiesProviderTest extends ExternalClientTestCase
         yield 'It it skips cities with unexpected data' => [
             $this->getResponseContent(__DIR__ . '/get.cities.without-name.json'),
             [
-                new City('Paris', 48.866, 2.355)
+                new CityDTO('Paris', 48.866, 2.355)
             ]
         ];
     }

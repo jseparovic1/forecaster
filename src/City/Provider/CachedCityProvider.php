@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\City\Provider;
 
-use App\City\DataTransfer\City;
+use App\City\DTO\CityDTO;
 
 class CachedCityProvider implements CityProviderInterface
 {
-    /** @var array<City>|null */
+    /** @var array<CityDTO>|null */
     private ?array $cache = null;
 
     private CityProviderInterface $decorated;
@@ -19,7 +19,7 @@ class CachedCityProvider implements CityProviderInterface
     }
 
     /**
-     * @return array<City>
+     * @return array<CityDTO>
      */
     public function getAll(): array
     {

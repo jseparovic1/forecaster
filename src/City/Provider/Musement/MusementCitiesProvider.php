@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\City\Provider\Musement;
 
-use App\City\DataTransfer\City;
+use App\City\DTO\CityDTO;
 use App\City\Exception\FailedToGetCitiesException;
 use App\City\Provider\CityProviderInterface;
 use GuzzleHttp\Client;
@@ -24,7 +24,7 @@ final class MusementCitiesProvider implements CityProviderInterface
     }
 
     /**
-     * @return array<City>
+     * @return array<CityDTO>
      */
     public function getAll(): array
     {
@@ -46,14 +46,14 @@ final class MusementCitiesProvider implements CityProviderInterface
             try {
                 $city = $this->serializer->denormalize(
                     $cityData,
-                    City::class,
+                    CityDTO::class,
                     null,
                     [
                         AbstractNormalizer::GROUPS => 'api.city.get'
                     ]
                 );
 
-                assert($city instanceof City);
+                assert($city instanceof CityDTO);
                 $cities[] = $city;
             } catch (Throwable $exception) {
                 // Skip invalid records...

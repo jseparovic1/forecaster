@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Forecast\Provider\WeatherApi;
 
-use App\City\DataTransfer\City;
-use App\Forecast\DataTransfer\Forecast;
+use App\City\DTO\CityDTO;
+use App\Forecast\DTO\ForecastDTO;
 use App\Forecast\Exception\FailedToGetForecastException;
 use App\Forecast\Provider\ForecastProviderInterface;
 use App\Forecast\Provider\RangeInDays;
@@ -25,7 +25,7 @@ class WeatherApiForecastProvider implements ForecastProviderInterface
         $this->serializer = $serializer;
     }
 
-    public function getForecast(City $city, RangeInDays $days): Forecast
+    public function getForecast(CityDTO $city, RangeInDays $days): ForecastDTO
     {
         try {
             $response = $this->client->get(
@@ -50,7 +50,7 @@ class WeatherApiForecastProvider implements ForecastProviderInterface
         try {
             $forecast = $this->serializer->denormalize(
                 $body['forecast'] ?? null,
-                Forecast::class,
+                ForecastDTO::class,
                 null,
                 [
                     AbstractNormalizer::GROUPS => 'api.forecast.get',
@@ -60,7 +60,7 @@ class WeatherApiForecastProvider implements ForecastProviderInterface
             throw FailedToGetForecastException::for($city, 'Invalid forecast data received from API.');
         }
 
-        assert($forecast instanceof Forecast);
+        assert($forecast instanceof ForecastDTO);
 
         return $forecast;
     }

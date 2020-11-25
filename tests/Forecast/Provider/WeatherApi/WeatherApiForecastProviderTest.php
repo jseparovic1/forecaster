@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AppTest\Forecast\Provider\WeatherApi;
 
-use App\City\DataTransfer\City;
-use App\Forecast\DataTransfer\ForecastDay;
+use App\City\DTO\CityDTO;
+use App\Forecast\DTO\ForecastDayDTO;
 use App\Forecast\Exception\FailedToGetForecastException;
 use App\Forecast\Provider\RangeInDays;
 use App\Forecast\Provider\WeatherApi\WeatherApiForecastProvider;
@@ -23,7 +23,7 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
      * @dataProvider getWeatherApiForecastExceptions
      */
     public function test_it_gets_daily_forecast_for_city(
-        City $city,
+        CityDTO $city,
         RangeInDays $days,
         string $response,
         array $expected
@@ -37,13 +37,13 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
         $this->assertEquals(
             $expected,
             array_map(
-                fn(ForecastDay $day) => $day->getDay()->getCondition()->getText(),
+                fn(ForecastDayDTO $day) => $day->getDay()->getCondition()->getText(),
                 $forecast->getDaily()
             )
         );
     }
 
-    private function getWeatherApiClient(City $city, RangeInDays $days, string $rawResponse): Client
+    private function getWeatherApiClient(CityDTO $city, RangeInDays $days, string $rawResponse): Client
     {
         $response = new Response(200, [], $rawResponse);
 
@@ -64,7 +64,7 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
     public function getWeatherApiForecastExceptions(): Generator
     {
         yield 'It gets 2 day forecasts for Milano' => [
-            new City('Milano', 43.51, 16.45),
+            new CityDTO('Milano', 43.51, 16.45),
             new RangeInDays(2),
             $this->getResponseContent(__DIR__ . '/get.milan-two-day-forecast.success.json'),
             [
@@ -86,7 +86,7 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
 
         (new WeatherApiForecastProvider($client, $this->getSerializer()))
             ->getForecast(
-                new City('::name::', 9, 9),
+                new CityDTO('::name::', 9, 9),
                 new RangeInDays(1)
             );
     }
@@ -103,7 +103,7 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
 
         (new WeatherApiForecastProvider($client, $this->getSerializer()))
             ->getForecast(
-                new City('::name::', 9, 9),
+                new CityDTO('::name::', 9, 9),
                 new RangeInDays(1)
             );
     }

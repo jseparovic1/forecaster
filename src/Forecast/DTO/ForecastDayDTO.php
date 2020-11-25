@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Forecast\DataTransfer;
+namespace App\Forecast\DTO;
 
 use DateTimeInterface;
 
-class ForecastDay
+class ForecastDayDTO
 {
-    private Day $day;
+    private DayDTO $day;
     private DateTimeInterface $date;
 
-    public function __construct(DateTimeInterface $date, Day $day)
+    public function __construct(DateTimeInterface $date, DayDTO $day)
     {
         $this->day = $day;
         $this->date = $date;
@@ -22,7 +22,7 @@ class ForecastDay
         return $this->date;
     }
 
-    public function getDay(): Day
+    public function getDay(): DayDTO
     {
         return $this->day;
     }

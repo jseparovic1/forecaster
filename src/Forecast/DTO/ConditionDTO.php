@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Forecast\DataTransfer;
+namespace App\Forecast\DTO;
 
-class Condition
+class ConditionDTO
 {
     private string $text;
     private ?string $icon;

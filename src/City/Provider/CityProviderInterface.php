@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\City\Provider;
 
-use App\City\DataTransfer\City;
+use App\City\DTO\CityDTO;
 
 interface CityProviderInterface
 {
     /**
-     * @return array<City>
+     * @return array<CityDTO>
      */
     public function getAll(): array;
 }

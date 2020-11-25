@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Forecast\Exception;
 
-use App\City\DataTransfer\City;
+use App\City\DTO\CityDTO;
 use RuntimeException;
 
 class FailedToGetForecastException extends RuntimeException
 {
-    private City $city;
+    private CityDTO $city;
 
-    public static function for(City $city, string $reason): self
+    public static function for(CityDTO $city, string $reason): self
     {
         $exception = new self(
             sprintf('Failed to get forecast for city %s. %s', $city, $reason)
@@ -22,7 +22,7 @@ class FailedToGetForecastException extends RuntimeException
         return $exception;
     }
 
-    public static function fromApiData(City $city, string $reason): self
+    public static function fromApiData(CityDTO $city, string $reason): self
     {
         $exception = new self(
             sprintf('Failed to get forecast for city %s. %s', $city, $reason)
@@ -33,7 +33,7 @@ class FailedToGetForecastException extends RuntimeException
         return $exception;
     }
 
-    public function getCity(): City
+    public function getCity(): CityDTO
     {
         return $this->city;
     }

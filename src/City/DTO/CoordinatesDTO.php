@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\City\DataTransfer;
+namespace App\City\DTO;
 
-final class Coordinates
+final class CoordinatesDTO
 {
     private float $latitude;
     private float $longitude;
