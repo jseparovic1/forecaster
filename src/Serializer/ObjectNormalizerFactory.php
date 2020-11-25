@@ -33,7 +33,6 @@ class ObjectNormalizerFactory
             PropertyAccess::createPropertyAccessor(),
             new PropertyInfoExtractor(
                 [
-//                    new PhpDocExtractor(),
                     new ReflectionExtractor(),
                 ],
                 [

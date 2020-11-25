@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App;
 
 use App\City\Provider\CityProviderInterface;
-use App\City\Provider\Musement\MusementCitiesFactory;
+use App\City\Provider\Musement\MusementCitiesProviderFactory;
 use App\Command\ForecastCommand;
 use App\Command\ForecastCommandFactory;
 use App\Forecast\Provider\ForecastProviderInterface;
-use App\Forecast\Provider\WeatherApi\WeatherApiForecastFactory;
+use App\Forecast\Provider\WeatherApi\WeatherApiForecastProviderFactory;
 use App\Serializer\ObjectNormalizerFactory;
 use App\Serializer\SerializerFactory;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -30,8 +30,8 @@ class Configuration
                 'factories' => [
                     Serializer::class => SerializerFactory::class,
                     ForecastCommand::class => ForecastCommandFactory::class,
-                    CityProviderInterface::class => MusementCitiesFactory::class,
-                    ForecastProviderInterface::class => WeatherApiForecastFactory::class,
+                    CityProviderInterface::class => MusementCitiesProviderFactory::class,
+                    ForecastProviderInterface::class => WeatherApiForecastProviderFactory::class,
                     ObjectNormalizer::class => ObjectNormalizerFactory::class
                 ],
             ],

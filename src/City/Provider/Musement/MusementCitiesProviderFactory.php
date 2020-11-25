@@ -10,7 +10,7 @@ use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Serializer\Serializer;
 
-final class MusementCitiesFactory
+final class MusementCitiesProviderFactory
 {
     public function __invoke(ContainerInterface $container): CityProviderInterface
     {
@@ -19,7 +19,7 @@ final class MusementCitiesFactory
         $client = new Client($config);
 
         return new CachedCityProvider(
-            new MusementCities(
+            new MusementCitiesProvider(
                 $client,
                 $container->get(Serializer::class)
             )

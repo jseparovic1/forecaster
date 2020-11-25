@@ -12,7 +12,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
 use Symfony\Component\Serializer\Serializer;
 
-class WeatherApiForecastFactory
+class WeatherApiForecastProviderFactory
 {
     public function __invoke(ContainerInterface $container): ForecastProviderInterface
     {
@@ -41,6 +41,6 @@ class WeatherApiForecastFactory
             ]
         );
 
-        return new WeatherApiForecast($client, $container->get(Serializer::class));
+        return new WeatherApiForecastProvider($client, $container->get(Serializer::class));
     }
 }

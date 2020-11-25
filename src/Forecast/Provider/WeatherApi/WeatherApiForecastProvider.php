@@ -6,7 +6,7 @@ namespace App\Forecast\Provider\WeatherApi;
 
 use App\City\DataTransfer\City;
 use App\Forecast\DataTransfer\Forecast;
-use App\Forecast\Exception\FailedToGetForecast;
+use App\Forecast\Exception\FailedToGetForecastException;
 use App\Forecast\Provider\ForecastProviderInterface;
 use App\Forecast\Provider\RangeInDays;
 use GuzzleHttp\Client;
@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Throwable;
 
-class WeatherApiForecast implements ForecastProviderInterface
+class WeatherApiForecastProvider implements ForecastProviderInterface
 {
     private Client $client;
     private Serializer $serializer;
@@ -38,11 +38,11 @@ class WeatherApiForecast implements ForecastProviderInterface
                 ]
             );
         } catch (Throwable $exception) {
-            throw FailedToGetForecast::for($city, 'Accessing Weather API resulted in error.');
+            throw FailedToGetForecastException::for($city, 'Accessing Weather API resulted in error.');
         }
 
         if ($response->getStatusCode() !== 200) {
-            throw FailedToGetForecast::fromApiData($city, $response->getReasonPhrase());
+            throw FailedToGetForecastException::fromApiData($city, $response->getReasonPhrase());
         }
 
         $body = json_decode($response->getBody()->getContents(), true);
@@ -57,7 +57,7 @@ class WeatherApiForecast implements ForecastProviderInterface
                 ]
             );
         } catch (Throwable $exception) {
-            throw FailedToGetForecast::for($city, 'Invalid forecast data received from API.');
+            throw FailedToGetForecastException::for($city, 'Invalid forecast data received from API.');
         }
 
         assert($forecast instanceof Forecast);

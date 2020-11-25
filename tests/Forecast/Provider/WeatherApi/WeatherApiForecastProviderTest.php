@@ -6,16 +6,16 @@ namespace AppTest\Forecast\Provider\WeatherApi;
 
 use App\City\DataTransfer\City;
 use App\Forecast\DataTransfer\ForecastDay;
-use App\Forecast\Exception\FailedToGetForecast;
+use App\Forecast\Exception\FailedToGetForecastException;
 use App\Forecast\Provider\RangeInDays;
-use App\Forecast\Provider\WeatherApi\WeatherApiForecast;
+use App\Forecast\Provider\WeatherApi\WeatherApiForecastProvider;
 use AppTest\ExternalClientTestCase;
 use Generator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-final class WeatherApiForecastTest extends ExternalClientTestCase
+final class WeatherApiForecastProviderTest extends ExternalClientTestCase
 {
     use ProphecyTrait;
 
@@ -30,7 +30,7 @@ final class WeatherApiForecastTest extends ExternalClientTestCase
     ): void {
         $client = $this->getWeatherApiClient($city, $days, $response);
 
-        $forecast = (new WeatherApiForecast($client, $this->getSerializer()))
+        $forecast = (new WeatherApiForecastProvider($client, $this->getSerializer()))
             ->getForecast($city, $days);
 
 
@@ -82,9 +82,9 @@ final class WeatherApiForecastTest extends ExternalClientTestCase
             ->willThrow(\Exception::class);
         $client = $client->reveal();
 
-        $this->expectException(FailedToGetForecast::class);
+        $this->expectException(FailedToGetForecastException::class);
 
-        (new WeatherApiForecast($client, $this->getSerializer()))
+        (new WeatherApiForecastProvider($client, $this->getSerializer()))
             ->getForecast(
                 new City('::name::', 9, 9),
                 new RangeInDays(1)
@@ -99,9 +99,9 @@ final class WeatherApiForecastTest extends ExternalClientTestCase
             ->willReturn(new Response(200, [], '["not-expected-response"]'));
         $client = $client->reveal();
 
-        $this->expectException(FailedToGetForecast::class);
+        $this->expectException(FailedToGetForecastException::class);
 
-        (new WeatherApiForecast($client, $this->getSerializer()))
+        (new WeatherApiForecastProvider($client, $this->getSerializer()))
             ->getForecast(
                 new City('::name::', 9, 9),
                 new RangeInDays(1)

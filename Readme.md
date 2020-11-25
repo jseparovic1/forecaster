@@ -4,7 +4,7 @@ Forecaster is command line application that gets forecast via Weather API for li
 Goal of this application is to demonstrate author ability to implement all requirements while writing clean tested and
 maintainable code.  
 
-## Aplicaiton logic
+## Application logic
 ![Forecaster flow](forecaster.png "Forecaster flow")
 
 ## Arhitecture

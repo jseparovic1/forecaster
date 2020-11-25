@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AppTest\City\Provider\Musement;
 
 use App\City\DataTransfer\City;
-use App\City\Exception\FailedToGetCities;
-use App\City\Provider\Musement\MusementCities;
+use App\City\Exception\FailedToGetCitiesException;
+use App\City\Provider\Musement\MusementCitiesProvider;
 use AppTest\ExternalClientTestCase;
 use Exception;
 use Generator;
@@ -14,7 +14,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-final class MusementCitiesTest extends ExternalClientTestCase
+final class MusementCitiesProviderTest extends ExternalClientTestCase
 {
     use ProphecyTrait;
 
@@ -25,7 +25,7 @@ final class MusementCitiesTest extends ExternalClientTestCase
     {
         $client = $this->getMusementClient($response);
 
-        $cities = (new MusementCities($client, $this->getSerializer()))->getAll();
+        $cities = (new MusementCitiesProvider($client, $this->getSerializer()))->getAll();
 
         $this->assertEquals($expected, $cities);
     }
@@ -65,8 +65,8 @@ final class MusementCitiesTest extends ExternalClientTestCase
         $client->get('cities')->willThrow(Exception::class);
         $client = $client->reveal();
 
-        $this->expectException(FailedToGetCities::class);
+        $this->expectException(FailedToGetCitiesException::class);
 
-        (new MusementCities($client, $this->getSerializer()))->getAll();
+        (new MusementCitiesProvider($client, $this->getSerializer()))->getAll();
     }
 }

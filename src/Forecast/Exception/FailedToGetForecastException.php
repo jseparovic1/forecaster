@@ -7,7 +7,7 @@ namespace App\Forecast\Exception;
 use App\City\DataTransfer\City;
 use RuntimeException;
 
-class FailedToGetForecast extends RuntimeException
+class FailedToGetForecastException extends RuntimeException
 {
     private City $city;
 
