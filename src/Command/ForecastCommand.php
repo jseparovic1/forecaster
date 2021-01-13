@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\City\Provider\CityProviderInterface;
-use App\Forecast\Provider\ForecastProviderInterface;
+use App\City\Provider\CityProvider;
+use App\Forecast\Provider\ForecastProvider;
 use App\Forecast\Provider\RangeInDays;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Throwable;
 
 class ForecastCommand extends Command
 {
     public const NAME = 'cities:forecast';
 
-    private CityProviderInterface $cities;
-    private ForecastProviderInterface $forecasts;
+    private CityProvider $cities;
+    private ForecastProvider $forecasts;
 
-    public function __construct(CityProviderInterface $cities, ForecastProviderInterface $forecasts)
+    public function __construct(CityProvider $cities, ForecastProvider $forecasts)
     {
         parent::__construct(self::NAME);
 
@@ -42,21 +43,19 @@ class ForecastCommand extends Command
             return Command::FAILURE;
         }
 
-        foreach ($cities as $city) {
-            try {
-                $forecast = $this->forecasts->getForecast($city, new RangeInDays(2));
-            } catch (Throwable $exception) {
-                $output->writeln(
-                    sprintf('Skipping city %s. %s', $city->getName(), $exception->getMessage())
-                );
+        $stopwatch = (new Stopwatch());
+        $stopwatch->start('forecast_fetch');
 
-                continue;
-            }
+        $forecasts = $this->forecasts->getForecasts($cities, new RangeInDays(2));
 
+        foreach ($forecasts as $city => $forecast) {
             $output->writeln(
                 sprintf('Processed city %s | %s', $city, $forecast)
             );
         }
+
+        $stopped = $stopwatch->stop('forecast_fetch');
+        $output->writeln($stopped->__toString());
 
         return Command::SUCCESS;
     }

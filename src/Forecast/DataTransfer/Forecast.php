@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Forecast\DTO;
+namespace App\Forecast\DataTransfer;
 
-class ForecastDTO
+class Forecast
 {
     /**
-     * @var ForecastDayDTO[]
+     * @var ForecastDay[]
      */
     private array $forecasts;
 
     /**
-     * @param ForecastDayDTO[] $forecasts
+     * @param ForecastDay[] $forecasts
      */
     public function __construct(array $forecasts)
     {
@@ -20,7 +20,7 @@ class ForecastDTO
     }
 
     /**
-     * @return ForecastDayDTO[]
+     * @return ForecastDay[]
      */
     public function getDaily(): array
     {
@@ -30,7 +30,7 @@ class ForecastDTO
     public function __toString(): string
     {
         $dailyForecasts = array_map(
-            fn(ForecastDayDTO $day) => $day->getDay()->getCondition()->getText(),
+            fn(ForecastDay $day) => $day->getDay()->getCondition()->getText(),
             $this->getDaily()
         );
 

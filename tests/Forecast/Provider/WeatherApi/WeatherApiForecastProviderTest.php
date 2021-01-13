@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace AppTest\Forecast\Provider\WeatherApi;
 
-use App\City\DTO\CityDTO;
-use App\Forecast\DTO\ForecastDayDTO;
-use App\Forecast\Exception\FailedToGetForecastException;
+use App\City\DataTransfer\City;
+use App\Forecast\DataTransfer\ForecastDay;
+use App\Forecast\Exception\FailedToGetForecast;
 use App\Forecast\Provider\RangeInDays;
 use App\Forecast\Provider\WeatherApi\WeatherApiForecastProvider;
 use AppTest\ExternalClientTestCase;
 use Generator;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -23,7 +24,7 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
      * @dataProvider getWeatherApiForecastExceptions
      */
     public function test_it_gets_daily_forecast_for_city(
-        CityDTO $city,
+        City $city,
         RangeInDays $days,
         string $response,
         array $expected
@@ -37,13 +38,13 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
         $this->assertEquals(
             $expected,
             array_map(
-                fn(ForecastDayDTO $day) => $day->getDay()->getCondition()->getText(),
+                fn(ForecastDay $day) => $day->getDay()->getCondition()->getText(),
                 $forecast->getDaily()
             )
         );
     }
 
-    private function getWeatherApiClient(CityDTO $city, RangeInDays $days, string $rawResponse): Client
+    private function getWeatherApiClient(City $city, RangeInDays $days, string $rawResponse): Client
     {
         $response = new Response(200, [], $rawResponse);
 
@@ -64,7 +65,7 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
     public function getWeatherApiForecastExceptions(): Generator
     {
         yield 'It gets 2 day forecasts for Milano' => [
-            new CityDTO('Milano', 43.51, 16.45),
+            new City('Milano', 43.51, 16.45),
             new RangeInDays(2),
             $this->getResponseContent(__DIR__ . '/get.milan-two-day-forecast.success.json'),
             [
@@ -79,14 +80,14 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
         $client = $this->prophesize(Client::class);
         $client
             ->get('forecast.json', ["query" => ["q" => "::name::", "days" => 1]])
-            ->willThrow(\Exception::class);
+            ->willThrow(GuzzleException::class);
         $client = $client->reveal();
 
-        $this->expectException(FailedToGetForecastException::class);
+        $this->expectException(FailedToGetForecast::class);
 
         (new WeatherApiForecastProvider($client, $this->getSerializer()))
             ->getForecast(
-                new CityDTO('::name::', 9, 9),
+                new City('::name::', 9, 9),
                 new RangeInDays(1)
             );
     }
@@ -99,11 +100,11 @@ final class WeatherApiForecastProviderTest extends ExternalClientTestCase
             ->willReturn(new Response(200, [], '["not-expected-response"]'));
         $client = $client->reveal();
 
-        $this->expectException(FailedToGetForecastException::class);
+        $this->expectException(FailedToGetForecast::class);
 
         (new WeatherApiForecastProvider($client, $this->getSerializer()))
             ->getForecast(
-                new CityDTO('::name::', 9, 9),
+                new City('::name::', 9, 9),
                 new RangeInDays(1)
             );
     }

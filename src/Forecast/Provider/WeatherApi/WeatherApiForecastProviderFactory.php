@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Forecast\Provider\WeatherApi;
 
-use App\Forecast\Provider\ForecastProviderInterface;
+use App\Forecast\Provider\ForecastProvider;
 use GuzzleHttp\Client;
-use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
@@ -14,7 +13,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class WeatherApiForecastProviderFactory
 {
-    public function __invoke(ContainerInterface $container): ForecastProviderInterface
+    public function __invoke(ContainerInterface $container): ForecastProvider
     {
         $config = $container->get('config')['weather_api'];
 
@@ -30,8 +29,7 @@ class WeatherApiForecastProviderFactory
             };
         };
 
-        $stack = new HandlerStack();
-        $stack->setHandler(new CurlHandler());
+        $stack = HandlerStack::create();
         $stack->push($addApiKey($config['key']));
 
         $client = new Client(

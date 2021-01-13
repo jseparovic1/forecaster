@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\City\DTO;
+namespace App\City\DataTransfer;
 
-class CityDTO
+class City
 {
     private string $name;
-    private CoordinatesDTO $coordinates;
+    private Coordinates $coordinates;
 
     public function __construct(string $name, float $latitude, float $longitude)
     {
         $this->name = $name;
-        $this->coordinates = new CoordinatesDTO($latitude, $longitude);
+        $this->coordinates = new Coordinates($latitude, $longitude);
     }
 
     public function getName(): string
@@ -20,7 +20,7 @@ class CityDTO
         return $this->name;
     }
 
-    public function getCoordinates(): CoordinatesDTO
+    public function getCoordinates(): Coordinates
     {
         return $this->coordinates;
     }

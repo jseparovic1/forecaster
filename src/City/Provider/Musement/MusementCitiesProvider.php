@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\City\Provider\Musement;
 
-use App\City\DTO\CityDTO;
-use App\City\Exception\FailedToGetCitiesException;
-use App\City\Provider\CityProviderInterface;
+use App\City\DataTransfer\City;
+use App\City\Exception\FailedToGetCities;
+use App\City\Provider\CityProvider;
 use GuzzleHttp\Client;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Throwable;
 
-final class MusementCitiesProvider implements CityProviderInterface
+final class MusementCitiesProvider implements CityProvider
 {
     private Client $client;
     private Serializer $serializer;
@@ -24,18 +24,18 @@ final class MusementCitiesProvider implements CityProviderInterface
     }
 
     /**
-     * @return array<CityDTO>
+     * @return array<City>
      */
     public function getAll(): array
     {
         try {
             $response = $this->client->get('cities');
         } catch (Throwable $exception) {
-            throw FailedToGetCitiesException::because('Getting data from Musement API resulted in exception.');
+            throw FailedToGetCities::because('Getting data from Musement API resulted in exception.');
         }
 
         if ($response->getStatusCode() !== 200) {
-            throw FailedToGetCitiesException::because($response->getReasonPhrase());
+            throw FailedToGetCities::because($response->getReasonPhrase());
         }
 
         $body = json_decode($response->getBody()->getContents(), true);
@@ -46,14 +46,14 @@ final class MusementCitiesProvider implements CityProviderInterface
             try {
                 $city = $this->serializer->denormalize(
                     $cityData,
-                    CityDTO::class,
+                    City::class,
                     null,
                     [
                         AbstractNormalizer::GROUPS => 'api.city.get'
                     ]
                 );
 
-                assert($city instanceof CityDTO);
+                assert($city instanceof City);
                 $cities[] = $city;
             } catch (Throwable $exception) {
                 // Skip invalid records...

@@ -4,7 +4,7 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
         https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
-    <class name="App\Forecast\DTO\ForecastDTO">
+    <class name="App\Forecast\DataTransfer\Forecast">
         <attribute name="forecasts" serialized-name="forecastday">
             <group>api.forecast.get</group>
         </attribute>

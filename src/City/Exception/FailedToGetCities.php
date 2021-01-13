@@ -6,7 +6,7 @@ namespace App\City\Exception;
 
 use RuntimeException;
 
-class FailedToGetCitiesException extends RuntimeException
+class FailedToGetCities extends RuntimeException
 {
     public static function because(string $reason): self
     {

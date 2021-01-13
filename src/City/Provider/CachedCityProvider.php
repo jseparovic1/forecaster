@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\City\Provider;
 
-use App\City\DTO\CityDTO;
+use App\City\DataTransfer\City;
 
-class CachedCityProvider implements CityProviderInterface
+class CachedCityProvider implements CityProvider
 {
-    /** @var array<CityDTO>|null */
+    /** @var array<City>|null */
     private ?array $cache = null;
 
-    private CityProviderInterface $decorated;
+    private CityProvider $decorated;
 
-    public function __construct(CityProviderInterface $decorated)
+    public function __construct(CityProvider $decorated)
     {
         $this->decorated = $decorated;
     }
 
     /**
-     * @return array<CityDTO>
+     * @return array<City>
      */
     public function getAll(): array
     {
